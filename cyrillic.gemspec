@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["rovetz"]
   spec.email         = ["zakbox@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Romanization (transliteration) of Cyrillic"
+  spec.description   = "Romanization (transliteration) of Cyrillic. Converts Cyrillic text to the Roman (Latin) script"
+  spec.homepage      = "https://github.com/rovetz/cyrillic"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
