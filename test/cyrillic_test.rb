@@ -5,7 +5,7 @@ class CyrillicTest < Minitest::Test
     refute_nil ::Cyrillic::VERSION
   end
 
-  def test_it_does_something_useful
-    assert false
+  def test_it_does_transliteration
+    assert_equal "KirilliTSa", Cyrillic.t("КириллиЦа")
   end
 end
