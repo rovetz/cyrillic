@@ -1,4 +1,4 @@
-# Cyrillic
+# Cyrillic -> Latin
 
 Romanization of Cyrillic. It transliterates Cyrillic text to the Roman (Latin) script.
 
