@@ -1,4 +1,4 @@
-# Cyrillic -> Latin
+# Cyrillic -> Latin: Cyrillic.t("Кириллица") => "Kirillitsa"
 
 [![Gem Version](https://badge.fury.io/rb/cyrillic.svg)](https://badge.fury.io/rb/cyrillic)
 [![Build Status](https://travis-ci.org/rovetz/cyrillic.svg?branch=main)](https://travis-ci.org/rovetz/cyrillic)
