@@ -1,6 +1,19 @@
 # Cyrillic -> Latin
 
-Romanization of Cyrillic. It transliterates Cyrillic text to the Roman (Latin) script.
+[![Gem Version](https://badge.fury.io/rb/cyrillic.svg)](https://badge.fury.io/rb/cyrillic)
+[![Build Status](https://travis-ci.org/rovetz/cyrillic.svg?branch=main)](https://travis-ci.org/rovetz/cyrillic)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+**Cyrillic** is a Ruby gem for the romanization (transliteration) of Cyrillic script into the Latin alphabet. It provides a simple and flexible way to convert Cyrillic text using various international and language-specific standards.
+
+## Features
+
+This gem supports multiple transliteration standards:
+
+*   `generic` (Default)
+*   `iso9`
+*   `ukrainian`
+*   `mongolian`
 
 ## Installation
 
@@ -20,27 +33,53 @@ Or install it yourself as:
 
 ## Usage
 
+The gem provides a simple interface through the `Cyrillic.t` (or `Cyrillic.transliterate`) method.
+
+### Basic Usage
+
+By default, it uses a generic transliteration scheme.
+
 ```ruby
 require "cyrillic"
-```
 
-Then
-
-```ruby
-Cyrillic.transliterate("Кириллица")
-```
-or
-
-```ruby
 Cyrillic.t("Кириллица")
+#=> "Kirillitsa"
 ```
 
+### Specifying a Standard
+
+You can specify a transliteration standard by passing a symbol as the second argument.
+
+#### ISO 9
+
+```ruby
+Cyrillic.transliterate("Кириллица", :iso9)
+#=> "Kirillica"
+```
+
+#### Ukrainian
+
+```ruby
+Cyrillic.transliterate("Кирилиця", :ukrainian)
+#=> "Kyrylytsia"
+```
+
+#### Mongolian
+
+```ruby
+Cyrillic.t("Монгол хэл", :mongolian)
+#=> "Mongol khel"
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install development dependencies.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To run the test suite, use the `rake` command:
+
+    $ rake
+
+You can also run `bin/console` for an interactive prompt that will allow you to experiment with the gem.
 
 ## Contributing
 
