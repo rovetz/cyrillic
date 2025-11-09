@@ -1,7 +1,7 @@
 require "cyrillic/version"
 require "cyrillic/iso9"
 require "cyrillic/mongolian"
-# require "cyrillic/ukrainian"
+require "cyrillic/ukrainian"
 
 module Cyrillic
 
