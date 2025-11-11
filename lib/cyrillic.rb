@@ -2,6 +2,7 @@ require "cyrillic/version"
 require "cyrillic/iso9"
 require "cyrillic/mongolian"
 require "cyrillic/ukrainian"
+require "cyrillic/ua_passport"
 
 module Cyrillic
 
@@ -12,11 +13,11 @@ module Cyrillic
 
   class << self
     def transliterate(string = "", to = :cyrillic)
+      return UaPassport.transliterate(string) if to == :ua_passport
+
       character_table = Module.const_get(to.to_s.capitalize)::CHARACTER_TABLE
       string.to_s.gsub(/#{Regexp.union(character_table.keys).source}/i, character_table)
-
     end
     alias_method :t, :transliterate
   end
-
 end
