@@ -13,7 +13,9 @@ This gem supports multiple transliteration standards:
 *   `generic` (Default)
 *   `iso9`
 *   `ukrainian`
+*   `ukrainian passport`
 *   `mongolian`
+*   `german`
 
 ## Installation
 
