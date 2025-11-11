@@ -3,6 +3,7 @@ require "cyrillic/iso9"
 require "cyrillic/mongolian"
 require "cyrillic/ukrainian"
 require "cyrillic/ua_passport"
+require "cyrillic/de"
 
 module Cyrillic
 
