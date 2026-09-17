@@ -12,4 +12,9 @@ end
 
 RuboCop::RakeTask.new(:rubocop)
 
+desc "Run performance benchmarks"
+task :benchmark do
+  ruby "benchmark/run.rb"
+end
+
 task default: %i[test rubocop]

@@ -32,6 +32,8 @@ Gem::Specification.new do |spec|
   spec.executables   = ["cyrillic"]
   spec.require_paths = ["lib"]
 
+  spec.add_development_dependency "benchmark"
+  spec.add_development_dependency "benchmark-ips"
   spec.add_development_dependency "irb"
   spec.add_development_dependency "minitest", ">= 5.25"
   spec.add_development_dependency "rake", ">= 13.2"
