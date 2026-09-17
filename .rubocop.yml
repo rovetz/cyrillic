@@ -1,0 +1,50 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - 'bin/**/*'
+    - 'pkg/**/*'
+    - 'vendor/**/*'
+    - 'coverage/**/*'
+
+Layout/LineLength:
+  AllowedPatterns:
+    - '^\s*assert_equal'
+    - '^\s*#'
+    - '^\s*"'
+    - 'spec\.description'
+    - 'k = %w\['
+    - 'v = %w\['
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/CollectionLiteralLength:
+  Enabled: false

@@ -1,28 +1,26 @@
-# Cyrillic -> Latin: Cyrillic.t("Кириллица") => "Kirillitsa"
+# Cyrillic
 
+[![Ruby](https://github.com/rovetz/cyrillic/actions/workflows/ruby.yml/badge.svg)](https://github.com/rovetz/cyrillic/actions/workflows/ruby.yml)
 [![Gem Version](https://badge.fury.io/rb/cyrillic.svg)](https://badge.fury.io/rb/cyrillic)
-[![Build Status](https://travis-ci.org/rovetz/cyrillic.svg?branch=main)](https://travis-ci.org/rovetz/cyrillic)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-**Cyrillic** is a Ruby gem for the romanization (transliteration) of Cyrillic script into the Latin alphabet. It provides a simple and flexible way to convert Cyrillic text using various international and language-specific standards.
+**Cyrillic** is a Ruby gem for romanization (transliteration) of Cyrillic script into the Roman (Latin) alphabet. It provides a simple and flexible interface with support for international and national standards.
 
-## Features
+## Supported Schemes
 
-This gem supports multiple transliteration standards:
-
-*   `generic` (Default)
-*   `iso9`
-*   `ukrainian`
-*   `ukrainian passport`
-*   `mongolian`
-*   `german`
+*   `:cyrillic` (Default generic Cyrillic transliteration)
+*   `:iso9` (ISO 9:1995 standard)
+*   `:ukrainian` (Ukrainian national standard)
+*   `:ua_passport` (Ukrainian international passport transliteration standard)
+*   `:mongolian` (Mongolian Cyrillic MNS 5217:2012)
+*   `:de` (German Duden/phonetic transliteration)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'cyrillic'
+gem "cyrillic"
 ```
 
 And then execute:
@@ -35,53 +33,73 @@ Or install it yourself as:
 
 ## Usage
 
-The gem provides a simple interface through the `Cyrillic.t` (or `Cyrillic.transliterate`) method.
-
-### Basic Usage
-
-By default, it uses a generic transliteration scheme.
-
 ```ruby
 require "cyrillic"
 
+# Default Cyrillic transliteration
+Cyrillic.transliterate("Кириллица")
+# => "KirilliTSa"
+
+# Short alias .t
 Cyrillic.t("Кириллица")
-#=> "Kirillitsa"
-```
+# => "KirilliTSa"
 
-### Specifying a Standard
+# ISO 9:1995 scheme
+Cyrillic.t("Не важно, как медленно ты продвигаешься", :iso9)
+# => "Ne važno, kak medlenno ty prodvigaešʹsâ"
 
-You can specify a transliteration standard by passing a symbol as the second argument.
+# Ukrainian scheme
+Cyrillic.t("Київ", :ukrainian)
+# => "Kyiv"
 
-#### ISO 9
+# Ukrainian passport scheme
+Cyrillic.t("Борщагівка", :ua_passport)
+# => "Borshchahivka"
 
-```ruby
-Cyrillic.transliterate("Кириллица", :iso9)
-#=> "Kirillica"
-```
-
-#### Ukrainian
-
-```ruby
-Cyrillic.transliterate("Кирилиця", :ukrainian)
-#=> "Kyrylytsia"
-```
-
-#### Mongolian
-
-```ruby
+# Mongolian scheme
 Cyrillic.t("Монгол хэл", :mongolian)
-#=> "Mongol khel"
+# => "Mongol khel"
+
+# German transliteration scheme
+Cyrillic.t("Чайковский", :de)
+# => "Tschajkowskij"
+```
+
+### Command Line Interface (CLI)
+
+You can also use `cyrillic` directly from your terminal:
+
+```bash
+# Direct argument
+$ cyrillic "Кириллица"
+KirilliTSa
+
+# Piped input (STDIN)
+$ echo "Кириллица" | cyrillic
+KirilliTSa
+
+# File input
+$ cyrillic text.txt
+
+# Specify transliteration scheme
+$ cyrillic -s iso9 "Транслитерация"
+Transliteraciâ
+
+$ cyrillic -s ukrainian "Київ"
+Kyiv
+
+$ cyrillic -s ua_passport "Борщагівка"
+Borshchahivka
+
+$ cyrillic -s de "Весна"
+Wesna
 ```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install development dependencies.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rake` to run tests and code style checks (RuboCop). You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To run the test suite, use the `rake` command:
-
-    $ rake
-
-You can also run `bin/console` for an interactive prompt that will allow you to experiment with the gem.
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
@@ -93,4 +111,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Cyrillic project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/rovetz/cyrillic/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Cyrillic project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/rovetz/cyrillic/blob/main/CODE_OF_CONDUCT.md).

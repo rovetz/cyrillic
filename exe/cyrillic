@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "optparse"
+require "cyrillic"
+
+scheme = nil
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: cyrillic [options] [text | file...]"
+  opts.separator ""
+  opts.separator "Transliterate Cyrillic script to Roman (Latin) script."
+  opts.separator ""
+  opts.separator "Examples:"
+  opts.separator "  cyrillic 'Кириллица'"
+  opts.separator "  echo 'Кириллица' | cyrillic"
+  opts.separator "  cyrillic text.txt"
+  opts.separator "  cyrillic -s iso9 'Транслитерация'"
+  opts.separator "  cyrillic -s ukrainian 'Київ'"
+  opts.separator "  cyrillic -s ua_passport 'Борщагівка'"
+  opts.separator "  cyrillic -s mongolian 'Монгол'"
+  opts.separator "  cyrillic -s de 'Весна'"
+  opts.separator ""
+  opts.separator "Options:"
+
+  opts.on("-s", "--scheme SCHEME", %w[default cyrillic iso9 mongolian ukrainian ua_passport de],
+          "Transliteration scheme (default, cyrillic, iso9, mongolian, ukrainian, ua_passport, de)") do |s|
+    scheme = s == "default" ? nil : s.to_sym
+  end
+
+  opts.on("-v", "--version", "Show version") do
+    puts "cyrillic #{Cyrillic::VERSION}"
+    exit
+  end
+
+  opts.on("-h", "--help", "Show this help message") do
+    puts opts
+    exit
+  end
+end
+
+parser.parse!
+
+transliterate = lambda do |text|
+  Cyrillic.transliterate(text, scheme || :cyrillic)
+end
+
+if ARGV.empty?
+  if $stdin.tty?
+    puts parser
+    exit 1
+  else
+    $stdin.each_line do |line|
+      puts transliterate.call(line.chomp)
+    end
+  end
+else
+  ARGV.each do |arg|
+    if File.file?(arg)
+      File.foreach(arg) do |line|
+        puts transliterate.call(line.chomp)
+      end
+    else
+      puts transliterate.call(arg)
+    end
+  end
+end

@@ -1,56 +1,64 @@
-module UaPassport
-  def self.transliterate(str = "")
-    str = str.gsub('Зг', 'Zgh').gsub('зг', 'zgh')
+# frozen_string_literal: true
 
-    result = ''
-    str.each_char.with_index do |char, index|
-      prev_char = index > 0 ? str[index - 1] : nil
-      is_word_start = prev_char.nil? || prev_char == ' '
+module Cyrillic
+  module UaPassport
+    k = %w[А Б В Г Ґ Д Е Ж З И І К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ а б в г ґ д е ж з и і к л м н о п р с т у ф х ц ч ш щ].freeze
+    v = %w[A B V H G D E Zh Z Y I K L M N O P R S T U F Kh Ts Ch Sh Shch a b v h g d e zh z y i k l m n o p r s t u f kh ts ch sh shch].freeze
 
-      case char
-      when 'Є'
-        result << (is_word_start ? 'Ye' : 'Ie')
-      when 'є'
-        result << (is_word_start ? 'ye' : 'ie')
-      when 'Ї'
-        result << (is_word_start ? 'Yi' : 'I')
-      when 'ї'
-        result << (is_word_start ? 'yi' : 'i')
-      when 'Й'
-        result << (is_word_start ? 'Y' : 'I')
-      when 'й'
-        result << (is_word_start ? 'y' : 'i')
-      when 'Ю'
-        result << (is_word_start ? 'Yu' : 'Iu')
-      when 'ю'
-        result << (is_word_start ? 'yu' : 'iu')
-      when 'Я'
-        result << (is_word_start ? 'Ya' : 'Ia')
-      when 'я'
-        result << (is_word_start ? 'ya' : 'ia')
-      when 'Ь', 'ь', "'"
-        result << ''
-      else
-        result << (CHARACTER_TABLE[char] || char)
+    CHARACTER_TABLE = k.zip(v).to_h.freeze
+
+    class << self
+      def transliterate(str = "")
+        return "" if str.nil? || str.empty?
+
+        str = str.to_s.gsub('Зг', 'Zgh').gsub('зг', 'zgh')
+
+        result = +""
+        str.each_char.with_index do |char, index|
+          prev_char = index.positive? ? str[index - 1] : nil
+          is_word_start = prev_char.nil? || prev_char == ' '
+
+          case char
+          when 'Є'
+            result << (is_word_start ? 'Ye' : 'Ie')
+          when 'є'
+            result << (is_word_start ? 'ye' : 'ie')
+          when 'Ї'
+            result << (is_word_start ? 'Yi' : 'I')
+          when 'ї'
+            result << (is_word_start ? 'yi' : 'i')
+          when 'Й'
+            result << (is_word_start ? 'Y' : 'I')
+          when 'й'
+            result << (is_word_start ? 'y' : 'i')
+          when 'Ю'
+            result << (is_word_start ? 'Yu' : 'Iu')
+          when 'ю'
+            result << (is_word_start ? 'yu' : 'iu')
+          when 'Я'
+            result << (is_word_start ? 'Ya' : 'Ia')
+          when 'я'
+            result << (is_word_start ? 'ya' : 'ia')
+          when 'Ь', 'ь', "'"
+            # Ignored in transliteration
+          else
+            result << (CHARACTER_TABLE[char] || char)
+          end
+        end
+        result
       end
     end
-    result
   end
-
-  private
-
-  k = %w(А Б В Г Ґ Д Е Ж З И І К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ а б в г ґ д е ж з и і к л м н о п р с т у ф х ц ч ш щ)
-  v = %w(A B V H G D E Zh Z Y I K L M N O P R S T U F Kh Ts Ch Sh Shch a b v h g d e zh z y i k l m n o p r s t u f kh ts ch sh shch)
-
-  CHARACTER_TABLE = Hash[k.zip(v)]
 end
+
+UaPassport = Cyrillic::UaPassport unless defined?(UaPassport)
 
 # https://pasport.org.ua/faq/transliteration
 # https://zakon.rada.gov.ua/laws/show/55-2010-%D0%BF/sp:dark?dark=0#Text
 
-# ТАБЛИЦЯ 
+# ТАБЛИЦЯ
 # транслітерації українського алфавіту латиницею
- 
+
 # ------------------------------------------------------------------
 # | Український | Латиниця |  Позиція у |    Приклади написання    |
 # |   алфавіт   |          |   слові    |--------------------------|
@@ -105,7 +113,7 @@ end
 # |-------------+----------+------------+------------+-------------|
 # |      Йй     |    Y     | на початку |Йосипівка   |Yosypivka    |
 # |             |          |    слова   |Стрий       |Stryi        |
-# |             |    i     |  в інших   |Олексій     |Oleksii      |
+# |             |    i     |  в других   |Олексій     |Oleksii      |
 # |             |          |  позиціях  |            |             |
 # |-------------+----------+------------+------------+-------------|
 # |      Кк     |    Kk    |            |Київ        |Kyiv         |
