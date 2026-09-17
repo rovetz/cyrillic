@@ -113,17 +113,18 @@ module Cyrillic
     #
     # @example Reverse GOST 7.79 System B
     #   Cyrillic.det("Shhuka", from: :gost779b) #=> "Щука"
-    def detransliterate(string = "", from: :iso9)
+    def detransliterate(string = "", scheme = nil, from: nil)
       return "" if string.nil? || string.empty?
 
-      scheme_key = from.to_s.downcase.to_sym
-      scheme = REVERSE_SCHEMES[scheme_key]
-      unless scheme
+      chosen = from || scheme || :iso9
+      scheme_key = chosen.to_s.downcase.to_sym
+      scheme_data = REVERSE_SCHEMES[scheme_key]
+      unless scheme_data
         available = (REVERSE_SCHEMES.keys - [:default]).map(&:inspect).join(", ")
-        raise ArgumentError, "Unknown detransliteration scheme: #{from.inspect}. Available schemes: #{available}"
+        raise ArgumentError, "Unknown detransliteration scheme: #{chosen.inspect}. Available schemes: #{available}"
       end
 
-      table, regexp = scheme
+      table, regexp = scheme_data
       string.to_s.gsub(regexp, table)
     end
     alias det detransliterate

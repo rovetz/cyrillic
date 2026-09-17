@@ -14,7 +14,8 @@ class DetransliterateTest < Minitest::Test
 
   def test_iso9_single_words
     assert_equal "Транслитерация", Cyrillic.det("Transliteraciâ", from: :iso9)
-    assert_equal "Россия", Cyrillic.det("Rossiâ", from: :iso9)
+    assert_equal "Транслитерация", Cyrillic.det("Transliteraciâ", :iso9)
+    assert_equal "Свобода", Cyrillic.det("Svoboda", :iso9)
   end
 
   def test_serbian_roundtrip

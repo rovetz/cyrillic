@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Comprehensive fixture datasets in `test/fixtures/` and automated test suite in `test/fixtures_test.rb` verifying Ukrainian, Serbian, Bulgarian, Belarusian, Mongolian, and standard international schemes.
 - Reverse transliteration (detransliteration) via `Cyrillic.detransliterate` (and aliases `.det`, `.reverse_transliterate`) with reverse mapping tables and longest-token-first greedy matching.
 - CLI flag `-r, --reverse` for reversing transliterated text back to Cyrillic.
 - Serbian transliteration scheme (`:serbian`) translating Vuk's Cyrillic to Gaj's Latin (`Lj`, `Nj`, `Dž`, `Đ`, `Ć`).
