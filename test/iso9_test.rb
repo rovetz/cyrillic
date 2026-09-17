@@ -15,3 +15,13 @@ na tehnite ravni i neotmenimi prava predstavlâva osnova na svobodata, spravedli
 на техните равни и неотменими права представлява основа на свободата, справедливостта и мира в света", :iso9)
   end
 end
+
+# Приклади: Строчинський Геннадій Віталійович — Stročins'kij Gennadìj Vìtalìjovič
+#
+# Солов'яненко Ганна Ярославівна — Solov'ânenko Ganna Âroslavìvna
+#
+# Гоцуляк Вікторія Анатоліївна — Goculâk Vìktorìâ Anatolìïvna
+#
+# Андрющенко  Євгенія Юріївна — Andrûŝenko Êvgeniâ Ûrìïvna
+
+# https://uk.wikipedia.org/wiki/ISO_9
