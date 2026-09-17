@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Cyrillic
+  # Bulgarian official Streamlined System (2006/2009) transliteration.
   module Bulgarian
     k = %w[
       А Б В Г Д Е Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ь Ю Я

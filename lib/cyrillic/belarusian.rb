@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Cyrillic
+  # Belarusian national / UN 2012 Łacinka transliteration.
   module Belarusian
     k = %w[
       А Б В Г Д Е Ё Ж З І Й К Л М Н О П Р С Т У Ў Ф Х Ц Ч Ш Ы Ь Э Ю Я

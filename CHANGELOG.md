@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Automated YARD documentation generation and deployment to GitHub Pages via `.github/workflows/docs.yml` and `rake yard` task.
+- Documentation link badge and `documentation_uri` gem metadata.
 - Comprehensive performance benchmark suite in `benchmark/run.rb` with `rake benchmark` task testing all schemes, detransliteration, and text scale using `benchmark-ips`.
 - Comprehensive fixture datasets in `test/fixtures/` and automated test suite in `test/fixtures_test.rb` verifying Ukrainian, Serbian, Bulgarian, Belarusian, Mongolian, and standard international schemes.
 - Reverse transliteration (detransliteration) via `Cyrillic.detransliterate` (and aliases `.det`, `.reverse_transliterate`) with reverse mapping tables and longest-token-first greedy matching.

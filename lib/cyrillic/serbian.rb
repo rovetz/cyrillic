@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Cyrillic
+  # Serbian Cyrillic to Gaj's Latin transliteration (Vukovica to Gajica).
   module Serbian
     k = %w[
       А Б В Г Д Ђ Е Ж З И Ј К Л Љ М Н Њ О П Р С Т Ћ У Ф Х Ц Ч Џ Ш

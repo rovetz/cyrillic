@@ -17,4 +17,13 @@ task :benchmark do
   ruby "benchmark/run.rb"
 end
 
+begin
+  require "yard"
+  YARD::Rake::YardocTask.new do |t|
+    t.files = ["lib/**/*.rb", "-", "README.md", "CHANGELOG.md", "LICENSE.txt"]
+  end
+rescue LoadError
+  # YARD not available
+end
+
 task default: %i[test rubocop]

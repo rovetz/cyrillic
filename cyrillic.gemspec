@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.metadata["source_code_uri"] = "https://github.com/rovetz/cyrillic"
   spec.metadata["changelog_uri"] = "https://github.com/rovetz/cyrillic/blob/main/CHANGELOG.md"
   spec.metadata["bug_tracker_uri"] = "https://github.com/rovetz/cyrillic/issues"
+  spec.metadata["documentation_uri"] = "https://rovetz.github.io/cyrillic/"
   spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.files = Dir.chdir(__dir__) do
@@ -40,4 +41,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rdoc"
   spec.add_development_dependency "rubocop", ">= 1.64"
   spec.add_development_dependency "simplecov", ">= 0.22"
+  spec.add_development_dependency "yard", ">= 0.9.36"
 end

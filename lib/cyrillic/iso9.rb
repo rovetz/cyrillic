@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Cyrillic
+  # ISO 9:1995 international standard transliteration.
   module Iso9
     CHARACTER_TABLE = {
       "А" => "A",

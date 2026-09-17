@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Cyrillic
+  # GOST 7.79-2000 System B (ISO 9 System B) ASCII digraphs transliteration.
   module Gost779b
     k = %w[
       А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я
