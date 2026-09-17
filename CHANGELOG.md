@@ -7,19 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-17
+
 ### Added
-- Automated YARD documentation generation and deployment to GitHub Pages via `.github/workflows/docs.yml` and `rake yard` task.
-- Documentation link badge and `documentation_uri` gem metadata.
-- Comprehensive performance benchmark suite in `benchmark/run.rb` with `rake benchmark` task testing all schemes, detransliteration, and text scale using `benchmark-ips`.
-- Comprehensive fixture datasets in `test/fixtures/` and automated test suite in `test/fixtures_test.rb` verifying Ukrainian, Serbian, Bulgarian, Belarusian, Mongolian, and standard international schemes.
+- 5 new transliteration schemes:
+  - Serbian (`:serbian`) translating Vuk's Cyrillic to Gaj's Latin (`Lj`, `Nj`, `Dž`, `Đ`, `Ć`).
+  - GOST 7.79-2000 System B (`:gost779b`) with standard ASCII digraphs.
+  - BGN/PCGN 1947 geographic romanization (`:bgn_pcgn`).
+  - Bulgarian official Streamlined System (`:bulgarian`).
+  - Belarusian national / UN 2012 Łacinka (`:belarusian`).
 - Reverse transliteration (detransliteration) via `Cyrillic.detransliterate` (and aliases `.det`, `.reverse_transliterate`) with reverse mapping tables and longest-token-first greedy matching.
 - CLI flag `-r, --reverse` for reversing transliterated text back to Cyrillic.
-- Serbian transliteration scheme (`:serbian`) translating Vuk's Cyrillic to Gaj's Latin (`Lj`, `Nj`, `Dž`, `Đ`, `Ć`).
-- GOST 7.79-2000 System B transliteration scheme (`:gost779b`) with standard ASCII digraphs.
-- BGN/PCGN 1947 geographic romanization scheme (`:bgn_pcgn`).
-- Bulgarian official Streamlined System transliteration scheme (`:bulgarian`).
-- Belarusian national / UN 2012 Łacinka transliteration scheme (`:belarusian`).
-- CLI executable support and unit test coverage for all 5 new schemes.
+- Comprehensive fixture datasets in `test/fixtures/` and automated test suite in `test/fixtures_test.rb` verifying Ukrainian, Serbian, Bulgarian, Belarusian, Mongolian, and standard international schemes.
+- Comprehensive performance benchmark suite in `benchmark/run.rb` with `rake benchmark` task testing all schemes, detransliteration, and text scale using `benchmark-ips`.
+- Automated YARD documentation generation and deployment to GitHub Pages via `.github/workflows/docs.yml` and `rake yard` task.
+- Documentation link badge in `README.md` and `documentation_uri` gem metadata.
+- CLI executable support and unit test coverage for all new schemes and detransliteration.
 
 ## [0.3.0] - 2026-09-17
 
