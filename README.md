@@ -88,6 +88,14 @@ Cyrillic.t("Монгол хэл", :mongolian)
 # German transliteration scheme
 Cyrillic.t("Чайковский", :de)
 # => "Tschajkowskij"
+
+# Reverse transliteration (Detransliteration)
+Cyrillic.detransliterate("Transliteraciâ", :iso9)
+# => "Транслитерация"
+
+# Short alias .det
+Cyrillic.det("Ljubljana", :serbian)
+# => "Љубљана"
 ```
 
 ### Command Line Interface (CLI)
@@ -133,6 +141,13 @@ Borshchahivka
 
 $ cyrillic -s de "Весна"
 Wesna
+
+# Reverse transliteration (-r, --reverse)
+$ cyrillic -r "Transliteraciâ"
+Транслитерация
+
+$ cyrillic -r -s serbian "Ljubljana"
+Љубљана
 ```
 
 ## Development

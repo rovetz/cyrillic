@@ -40,6 +40,30 @@ module Cyrillic
     belarusian: [Belarusian::CHARACTER_TABLE, Belarusian::REGEXP].freeze
   }.freeze
 
+  def self.build_reverse_mapping(table, extra = {})
+    rev = table.reject { |_cyr, lat| lat.nil? || lat.empty? }.to_h { |cyr, lat| [lat, cyr] }
+    rev.merge!(extra)
+    sorted_keys = rev.keys.sort_by { |key| -key.length }
+    [rev.freeze, Regexp.union(sorted_keys).freeze].freeze
+  end
+
+  REVERSE_SCHEMES = {
+    iso9: build_reverse_mapping(Iso9::CHARACTER_TABLE),
+    serbian: build_reverse_mapping(
+      Serbian::CHARACTER_TABLE,
+      { "LJ" => "Љ", "NJ" => "Њ", "DŽ" => "Џ", "DZ" => "Џ", "dz" => "џ" }
+    ),
+    gost779b: build_reverse_mapping(Gost779b::CHARACTER_TABLE),
+    bgn_pcgn: build_reverse_mapping(BgnPcgn::CHARACTER_TABLE),
+    bulgarian: build_reverse_mapping(Bulgarian::CHARACTER_TABLE),
+    belarusian: build_reverse_mapping(Belarusian::CHARACTER_TABLE),
+    mongolian: build_reverse_mapping(Mongolian::CHARACTER_TABLE),
+    ukrainian: build_reverse_mapping(Ukrainian::CHARACTER_TABLE),
+    de: build_reverse_mapping(De::CHARACTER_TABLE),
+    cyrillic: build_reverse_mapping(CHARACTER_TABLE),
+    default: build_reverse_mapping(CHARACTER_TABLE)
+  }.freeze
+
   class << self
     # Transliterates Cyrillic text into Roman (Latin) script.
     #
@@ -57,12 +81,6 @@ module Cyrillic
     #
     # @example Serbian Cyrillic to Latin (Vukovica to Gajica)
     #   Cyrillic.t("Љубљана", :serbian) #=> "Ljubljana"
-    #
-    # @example GOST 7.79 System B
-    #   Cyrillic.t("Щука", :gost779b) #=> "Shhuka"
-    #
-    # @example Bulgarian Streamlined System
-    #   Cyrillic.t("България", :bulgarian) #=> "Bulgariya"
     def transliterate(string = "", to = :cyrillic)
       return "" if string.nil? || string.empty?
 
@@ -79,5 +97,36 @@ module Cyrillic
       string.to_s.gsub(regexp, table)
     end
     alias t transliterate
+
+    # Detransliterates (reverses) Latin script text back into Cyrillic script.
+    #
+    # @param string [String, #to_s] The Latin script text to detransliterate.
+    # @param from [Symbol, String] The scheme to reverse (:iso9, :serbian, :gost779b, etc.).
+    # @return [String] The Cyrillic script string.
+    # @raise [ArgumentError] If the given scheme is unknown.
+    #
+    # @example Reverse ISO 9:1995 transliteration
+    #   Cyrillic.detransliterate("Transliteraciâ", from: :iso9) #=> "Транслитерация"
+    #
+    # @example Reverse Serbian transliteration (Gajica to Vukovica)
+    #   Cyrillic.det("Ljubljana", from: :serbian) #=> "Љубљана"
+    #
+    # @example Reverse GOST 7.79 System B
+    #   Cyrillic.det("Shhuka", from: :gost779b) #=> "Щука"
+    def detransliterate(string = "", from: :iso9)
+      return "" if string.nil? || string.empty?
+
+      scheme_key = from.to_s.downcase.to_sym
+      scheme = REVERSE_SCHEMES[scheme_key]
+      unless scheme
+        available = (REVERSE_SCHEMES.keys - [:default]).map(&:inspect).join(", ")
+        raise ArgumentError, "Unknown detransliteration scheme: #{from.inspect}. Available schemes: #{available}"
+      end
+
+      table, regexp = scheme
+      string.to_s.gsub(regexp, table)
+    end
+    alias det detransliterate
+    alias reverse_transliterate detransliterate
   end
 end

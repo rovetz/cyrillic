@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Reverse transliteration (detransliteration) via `Cyrillic.detransliterate` (and aliases `.det`, `.reverse_transliterate`) with reverse mapping tables and longest-token-first greedy matching.
+- CLI flag `-r, --reverse` for reversing transliterated text back to Cyrillic.
 - Serbian transliteration scheme (`:serbian`) translating Vuk's Cyrillic to Gaj's Latin (`Lj`, `Nj`, `Dž`, `Đ`, `Ć`).
 - GOST 7.79-2000 System B transliteration scheme (`:gost779b`) with standard ASCII digraphs.
 - BGN/PCGN 1947 geographic romanization scheme (`:bgn_pcgn`).

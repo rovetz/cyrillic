@@ -5,26 +5,20 @@ require "optparse"
 require "cyrillic"
 
 scheme = nil
+reverse = false
 
 parser = OptionParser.new do |opts|
   opts.banner = "Usage: cyrillic [options] [text | file...]"
   opts.separator ""
-  opts.separator "Transliterate Cyrillic script to Roman (Latin) script."
+  opts.separator "Transliterate Cyrillic script to Roman (Latin) script, or reverse with -r."
   opts.separator ""
   opts.separator "Examples:"
   opts.separator "  cyrillic 'Кириллица'"
   opts.separator "  echo 'Кириллица' | cyrillic"
-  opts.separator "  cyrillic text.txt"
-  opts.separator "  cyrillic -s iso9 'Транслитерация'"
-  opts.separator "  cyrillic -s ukrainian 'Київ'"
-  opts.separator "  cyrillic -s ua_passport 'Борщагівка'"
-  opts.separator "  cyrillic -s mongolian 'Монгол'"
-  opts.separator "  cyrillic -s de 'Весна'"
+  opts.separator "  cyrillic -r 'Transliteraciâ'"
   opts.separator "  cyrillic -s serbian 'Љубљана'"
-  opts.separator "  cyrillic -s gost779b 'Щука'"
-  opts.separator "  cyrillic -s bgn_pcgn 'Хабаровск'"
-  opts.separator "  cyrillic -s bulgarian 'България'"
-  opts.separator "  cyrillic -s belarusian 'Мінск'"
+  opts.separator "  cyrillic -r -s serbian 'Ljubljana'"
+  opts.separator "  cyrillic -r -s gost779b 'Shhuka'"
   opts.separator ""
   opts.separator "Options:"
 
@@ -32,6 +26,10 @@ parser = OptionParser.new do |opts|
   opts.on("-s", "--scheme SCHEME", schemes,
           "Transliteration scheme (#{schemes.join(', ')})") do |s|
     scheme = s == "default" ? nil : s.to_sym
+  end
+
+  opts.on("-r", "--reverse", "Reverse transliteration (Latin to Cyrillic)") do
+    reverse = true
   end
 
   opts.on("-v", "--version", "Show version") do
@@ -47,8 +45,12 @@ end
 
 parser.parse!
 
-transliterate = lambda do |text|
-  Cyrillic.transliterate(text, scheme || :cyrillic)
+process = lambda do |text|
+  if reverse
+    Cyrillic.detransliterate(text, from: scheme || :iso9)
+  else
+    Cyrillic.transliterate(text, scheme || :cyrillic)
+  end
 end
 
 if ARGV.empty?
@@ -57,17 +59,17 @@ if ARGV.empty?
     exit 1
   else
     $stdin.each_line do |line|
-      puts transliterate.call(line.chomp)
+      puts process.call(line.chomp)
     end
   end
 else
   ARGV.each do |arg|
     if File.file?(arg)
       File.foreach(arg) do |line|
-        puts transliterate.call(line.chomp)
+        puts process.call(line.chomp)
       end
     else
-      puts transliterate.call(arg)
+      puts process.call(arg)
     end
   end
 end
