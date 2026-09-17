@@ -6,6 +6,11 @@ require "cyrillic/mongolian"
 require "cyrillic/ukrainian"
 require "cyrillic/ua_passport"
 require "cyrillic/de"
+require "cyrillic/serbian"
+require "cyrillic/gost779b"
+require "cyrillic/bgn_pcgn"
+require "cyrillic/bulgarian"
+require "cyrillic/belarusian"
 
 module Cyrillic
   k = %w[
@@ -27,14 +32,20 @@ module Cyrillic
     mongolian: [Mongolian::CHARACTER_TABLE, Mongolian::REGEXP].freeze,
     ukrainian: [Ukrainian::CHARACTER_TABLE, Ukrainian::REGEXP].freeze,
     ua_passport: :ua_passport,
-    de: [De::CHARACTER_TABLE, De::REGEXP].freeze
+    de: [De::CHARACTER_TABLE, De::REGEXP].freeze,
+    serbian: [Serbian::CHARACTER_TABLE, Serbian::REGEXP].freeze,
+    gost779b: [Gost779b::CHARACTER_TABLE, Gost779b::REGEXP].freeze,
+    bgn_pcgn: [BgnPcgn::CHARACTER_TABLE, BgnPcgn::REGEXP].freeze,
+    bulgarian: [Bulgarian::CHARACTER_TABLE, Bulgarian::REGEXP].freeze,
+    belarusian: [Belarusian::CHARACTER_TABLE, Belarusian::REGEXP].freeze
   }.freeze
 
   class << self
     # Transliterates Cyrillic text into Roman (Latin) script.
     #
     # @param string [String, #to_s] The text to transliterate.
-    # @param to [Symbol, String] The transliteration scheme (:cyrillic, :iso9, :mongolian, :ukrainian, :ua_passport, :de).
+    # @param to [Symbol, String] The transliteration scheme (:cyrillic, :iso9, :mongolian,
+    #   :ukrainian, :ua_passport, :de, :serbian, :gost779b, :bgn_pcgn, :bulgarian, :belarusian).
     # @return [String] The transliterated Latin script string.
     # @raise [ArgumentError] If the given transliteration scheme is unknown.
     #
@@ -44,8 +55,14 @@ module Cyrillic
     # @example Short alias .t with ISO 9 scheme
     #   Cyrillic.t("Кириллица", :iso9) #=> "Kirillica"
     #
-    # @example Ukrainian Passport scheme
-    #   Cyrillic.t("Борщагівка", :ua_passport) #=> "Borshchahivka"
+    # @example Serbian Cyrillic to Latin (Vukovica to Gajica)
+    #   Cyrillic.t("Љубљана", :serbian) #=> "Ljubljana"
+    #
+    # @example GOST 7.79 System B
+    #   Cyrillic.t("Щука", :gost779b) #=> "Shhuka"
+    #
+    # @example Bulgarian Streamlined System
+    #   Cyrillic.t("България", :bulgarian) #=> "Bulgariya"
     def transliterate(string = "", to = :cyrillic)
       return "" if string.nil? || string.empty?
 

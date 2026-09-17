@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Serbian transliteration scheme (`:serbian`) translating Vuk's Cyrillic to Gaj's Latin (`Lj`, `Nj`, `Dž`, `Đ`, `Ć`).
+- GOST 7.79-2000 System B transliteration scheme (`:gost779b`) with standard ASCII digraphs.
+- BGN/PCGN 1947 geographic romanization scheme (`:bgn_pcgn`).
+- Bulgarian official Streamlined System transliteration scheme (`:bulgarian`).
+- Belarusian national / UN 2012 Łacinka transliteration scheme (`:belarusian`).
+- CLI executable support and unit test coverage for all 5 new schemes.
+
 ## [0.3.0] - 2026-09-17
 
 ### Added

@@ -9,9 +9,14 @@
 ## Supported Schemes
 
 *   `:cyrillic` (Default generic Cyrillic transliteration)
-*   `:iso9` (ISO 9:1995 standard)
+*   `:iso9` (ISO 9:1995 international standard)
+*   `:serbian` (Serbian Vuk's Cyrillic to Gaj's Latin)
+*   `:gost779b` (GOST 7.79-2000 System B ASCII digraphs)
+*   `:bgn_pcgn` (BGN/PCGN 1947 geographic romanization)
+*   `:bulgarian` (Bulgarian official Streamlined System)
+*   `:belarusian` (Belarusian national / UN 2012 Łacinka)
 *   `:ukrainian` (Ukrainian national standard)
-*   `:ua_passport` (Ukrainian international passport transliteration standard)
+*   `:ua_passport` (Ukrainian international passport standard)
 *   `:mongolian` (Mongolian Cyrillic MNS 5217:2012)
 *   `:de` (German Duden/phonetic transliteration)
 
@@ -47,6 +52,26 @@ Cyrillic.t("Кириллица")
 # ISO 9:1995 scheme
 Cyrillic.t("Не важно, как медленно ты продвигаешься", :iso9)
 # => "Ne važno, kak medlenno ty prodvigaešʹsâ"
+
+# Serbian Cyrillic to Latin (Vukovica to Gajica)
+Cyrillic.t("Љубљана", :serbian)
+# => "Ljubljana"
+
+# GOST 7.79-2000 System B (ASCII digraphs)
+Cyrillic.t("Щука", :gost779b)
+# => "Shhuka"
+
+# BGN/PCGN 1947 geographic romanization
+Cyrillic.t("Хабаровск", :bgn_pcgn)
+# => "Khabarovsk"
+
+# Bulgarian Streamlined System
+Cyrillic.t("България", :bulgarian)
+# => "Balgariya"
+
+# Belarusian national / UN 2012 Łacinka
+Cyrillic.t("Мінск", :belarusian)
+# => "Minsk"
 
 # Ukrainian scheme
 Cyrillic.t("Київ", :ukrainian)
@@ -84,6 +109,21 @@ $ cyrillic text.txt
 # Specify transliteration scheme
 $ cyrillic -s iso9 "Транслитерация"
 Transliteraciâ
+
+$ cyrillic -s serbian "Љубљана"
+Ljubljana
+
+$ cyrillic -s gost779b "Щука"
+Shhuka
+
+$ cyrillic -s bgn_pcgn "Хабаровск"
+Khabarovsk
+
+$ cyrillic -s bulgarian "България"
+Balgariya
+
+$ cyrillic -s belarusian "Мінск"
+Minsk
 
 $ cyrillic -s ukrainian "Київ"
 Kyiv

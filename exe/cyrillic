@@ -20,11 +20,17 @@ parser = OptionParser.new do |opts|
   opts.separator "  cyrillic -s ua_passport 'Борщагівка'"
   opts.separator "  cyrillic -s mongolian 'Монгол'"
   opts.separator "  cyrillic -s de 'Весна'"
+  opts.separator "  cyrillic -s serbian 'Љубљана'"
+  opts.separator "  cyrillic -s gost779b 'Щука'"
+  opts.separator "  cyrillic -s bgn_pcgn 'Хабаровск'"
+  opts.separator "  cyrillic -s bulgarian 'България'"
+  opts.separator "  cyrillic -s belarusian 'Мінск'"
   opts.separator ""
   opts.separator "Options:"
 
-  opts.on("-s", "--scheme SCHEME", %w[default cyrillic iso9 mongolian ukrainian ua_passport de],
-          "Transliteration scheme (default, cyrillic, iso9, mongolian, ukrainian, ua_passport, de)") do |s|
+  schemes = %w[default cyrillic iso9 mongolian ukrainian ua_passport de serbian gost779b bgn_pcgn bulgarian belarusian]
+  opts.on("-s", "--scheme SCHEME", schemes,
+          "Transliteration scheme (#{schemes.join(', ')})") do |s|
     scheme = s == "default" ? nil : s.to_sym
   end
 

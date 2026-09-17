@@ -41,6 +41,11 @@ class CyrillicTest < Minitest::Test
     assert_equal Cyrillic::Ukrainian, Ukrainian
     assert_equal Cyrillic::UaPassport, UaPassport
     assert_equal Cyrillic::De, De
+    assert_equal Cyrillic::Serbian, Serbian
+    assert_equal Cyrillic::Gost779b, Gost779b
+    assert_equal Cyrillic::BgnPcgn, BgnPcgn
+    assert_equal Cyrillic::Bulgarian, Bulgarian
+    assert_equal Cyrillic::Belarusian, Belarusian
   end
 
   def test_cli_argument
@@ -62,6 +67,13 @@ class CyrillicTest < Minitest::Test
 
     assert_predicate status, :success?
     assert_equal "Borshchahivka\n", out
+  end
+
+  def test_cli_serbian_scheme
+    out, status = Open3.capture2("bundle exec exe/cyrillic -s serbian 'Љубљана'")
+
+    assert_predicate status, :success?
+    assert_equal "Ljubljana\n", out
   end
 
   def test_cli_stdin
