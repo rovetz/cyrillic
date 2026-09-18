@@ -1,9 +1,7 @@
 # Cyrillic
 
 [![Ruby](https://github.com/rovetz/cyrillic/actions/workflows/ruby.yml/badge.svg)](https://github.com/rovetz/cyrillic/actions/workflows/ruby.yml)
-[![Docs](https://img.shields.io/badge/docs-rubydoc.info-blue.svg)](https://rovetz.github.io/cyrillic/)
 [![Gem Version](https://badge.fury.io/rb/cyrillic.svg)](https://badge.fury.io/rb/cyrillic)
-[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 **Cyrillic** is a Ruby gem for romanization (transliteration) of Cyrillic script into the Roman (Latin) alphabet. It provides a simple and flexible interface with support for international and national standards.
 
