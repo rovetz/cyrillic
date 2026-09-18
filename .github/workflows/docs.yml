@@ -1,3 +1,4 @@
+# Build and deploy YARD documentation to GitHub Pages
 name: Documentation
 
 on:
