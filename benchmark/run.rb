@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
+
 require "benchmark/ips"
-require_relative "../lib/cyrillic"
+require "cyrillic"
 
 SHORT_TEXT = "Не важно, как медленно ты продвигаешься, главное, что ты не останавливаешься."
 PARAGRAPH_TEXT = [

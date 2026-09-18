@@ -14,7 +14,7 @@ RuboCop::RakeTask.new(:rubocop)
 
 desc "Run performance benchmarks"
 task :benchmark do
-  ruby "benchmark/run.rb"
+  ruby "-Ilib", "benchmark/run.rb"
 end
 
 begin
